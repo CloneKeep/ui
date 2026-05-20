@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
+
 class Contents {
-  final String cid;
+  final String cId;
   final String content;
   final int status;
   final DateTime createdAt;
@@ -8,7 +10,7 @@ class Contents {
   final String? updatedId;
 
   Contents({
-    required this.cid,
+    required this.cId,
     required this.content,
     required this.status,
     required this.createdAt,
@@ -20,7 +22,7 @@ class Contents {
   // JSON데이터를 Dart 객체로 변환
   factory Contents.fromJson(Map<String, dynamic> json) {
     return Contents(
-      cid: json['cid'],
+      cId: json['cId'],
       content: json['content'],
       status: json['status'],
       createdAt: DateTime.parse(json['createAt']),

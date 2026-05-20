@@ -6,7 +6,7 @@ class ApiClient {
       // TODO: 나중에 백엔드 주소 변경
       baseUrl: const String.fromEnvironment(
         'API_URL',
-        // defaultValue: 'http://localhost:8080',
+        defaultValue: 'http://localhost:8080',
       ),
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 3),
