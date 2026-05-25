@@ -37,28 +37,29 @@ class _KeepMainScreenState extends State<KeepMainScreen> {
       content: '- 사과\n- 우유\n- 계란\n- 파스타 면\n- 올리브유',
       color: Colors.amber.shade100,
     ),
-    Note(
-      title: '아이디어',
-      content: '플러터 웹으로 구글 킵 클론 코딩하기! 레이아웃을 컴포넌트별로 쪼개서 만들면 유지보수가 쉽다.',
-      color: Colors.blue.shade100,
-    ),
-    Note(
-      title: '오늘 할 일',
-      content: '플러터 패키지 에러 해결하기 🛠️',
-      color: Colors.green.shade100,
-    ),
-    Note(
-      title: '일기',
-      content: '오늘 날씨가 너무 좋았다. 내일은 탁 트인 카페에 가서 웹 브라우저를 띄워놓고 반응형 UI를 테스트해봐야겠다.',
-      color: Colors.pink.shade100,
-    ),
-    Note(
-      title: '',
-      content: '제목이 없는 메모도 구글 킵에서는 자연스럽게 본문만 노출됩니다.',
-      color: Colors.purple.shade100,
-    ),
+    // Note(
+    //   title: '아이디어',
+    //   content: '플러터 웹으로 구글 킵 클론 코딩하기! 레이아웃을 컴포넌트별로 쪼개서 만들면 유지보수가 쉽다.',
+    //   color: Colors.blue.shade100,
+    // ),
+    // Note(
+    //   title: '오늘 할 일',
+    //   content: '플러터 패키지 에러 해결하기 🛠️',
+    //   color: Colors.green.shade100,
+    // ),
+    // Note(
+    //   title: '일기',
+    //   content: '오늘 날씨가 너무 좋았다. 내일은 탁 트인 카페에 가서 웹 브라우저를 띄워놓고 반응형 UI를 테스트해봐야겠다.',
+    //   color: Colors.pink.shade100,
+    // ),
+    // Note(
+    //   title: '',
+    //   content: '제목이 없는 메모도 구글 킵에서는 자연스럽게 본문만 노출됩니다.',
+    //   color: Colors.purple.shade100,
+    // ),
   ];
 
+  // 네비게이션 바에서 API 통신 테스트용 버튼 클릭 시 호출되는 함수(태그별 메모 조회 API 연동 예시)
   @override
   Widget build(BuildContext context) {
     return Scaffold(
