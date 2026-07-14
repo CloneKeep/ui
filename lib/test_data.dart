@@ -74,7 +74,7 @@ class TestDataPage extends StatelessWidget {
             // ),
             const Divider(height: 30),
             Text(
-              '가입일: ${user.createdAt.toLocal()}',
+              '가입일: ${user.createdAt?.toLocal()}',
               style: TextStyle(color: Colors.grey[600]),
             ),
             Text(
@@ -82,7 +82,7 @@ class TestDataPage extends StatelessWidget {
               style: TextStyle(color: Colors.grey[600]),
             ),
             Text(
-              '수정일: ${user.updatedAt.toLocal()}',
+              '수정일: ${user.updatedAt?.toLocal()}',
               style: TextStyle(color: Colors.grey[600]),
             ),
             Text(
