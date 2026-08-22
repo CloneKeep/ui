@@ -5,10 +5,15 @@ import 'package:ui/core/services/token_service.dart';
 class ApiClient {
   static final Dio instance = _createDio();
 
+  static const String _baseUrl = String.fromEnvironment(
+    'BASE_URL',
+    defaultValue: 'http://localhost:8080', // VS Code/Android Studio 로컬 실행 시 기본값
+  );
+
   static Dio _createDio() {
     final dio = Dio(
       BaseOptions(
-        baseUrl: 'http://localhost:8080', // 백엔드 서버 주소
+        baseUrl: _baseUrl, // 백엔드 서버 주소
         connectTimeout: const Duration(seconds: 5),
         receiveTimeout: const Duration(seconds: 5),
       ),
