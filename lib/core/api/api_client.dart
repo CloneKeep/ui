@@ -6,7 +6,7 @@ class ApiClient {
   static final Dio instance = _createDio();
 
   static const String _baseUrl = String.fromEnvironment(
-    'BASE_URL',
+    'API_URL',
     defaultValue: 'http://localhost:8080', // VS Code/Android Studio 로컬 실행 시 기본값
   );
 
