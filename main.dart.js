@@ -25392,7 +25392,7 @@ _.a=a
 _.b=b
 _.c=0
 _.e=_.d=null},
-aGC(){var s,r=A.aGJ("http://localhost:8080",B.mP,B.mP),q=new A.Ke(A.c([B.AG],t.i6))
+aGC(){var s,r=A.aGJ("https://integrationschedulerproject-service-1051384011770.asia-northeast3.run.app",B.mP,B.mP),q=new A.Ke(A.c([B.AG],t.i6))
 q.R(q,B.GN)
 s=new A.a0O($,q,$,new A.a4d(51200),!1)
 s.Un$=r
