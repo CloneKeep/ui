@@ -9,7 +9,7 @@ class NoteRepository {
   // 데이터 정제
   Future<List<Notes>> fetchNotesAndContents(String uId) async {
     try {
-      final response = await ApiClient.instance.post(
+      final response = await ApiClient.instance.get(
         '/notes/me',
         data: {"uid": uId},
         options: Options(responseType: ResponseType.plain),
