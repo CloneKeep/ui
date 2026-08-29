@@ -60,7 +60,7 @@ class NoteRepository {
             userData = rawMap; // 껍데기가 이미 벗겨져서 왔을 경우 대비 fallback
           }
 
-          print('👉 진짜 변환에 사용하는 완전히 알몸이 된 userData: $userData');
+          print('userData: $userData');
 
           // contents 데이터 구조 안전 정제
           Map<String, dynamic> finalContentsMap = {};
@@ -79,7 +79,7 @@ class NoteRepository {
             'contents': finalContentsMap,
           };
 
-          print('👉 최종 조립된 adjustedJson: $adjustedJson');
+          print('adjustedJson: $adjustedJson');
           return Notes.fromJson(adjustedJson);
         }).toList();
 
@@ -96,4 +96,5 @@ class NoteRepository {
       throw Exception("데이터 처리시 오류가 발생했습니다.");
     }
   }
+  
 }

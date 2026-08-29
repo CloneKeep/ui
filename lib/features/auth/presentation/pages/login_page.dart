@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart'; // kDebugMode 사용을 위한 import
 import 'package:flutter/material.dart';
 import 'package:ui/core/api/api_client.dart';
 import 'package:ui/core/services/token_service.dart';
@@ -16,6 +17,16 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // 테스트용 정보
+    if (kDebugMode) {
+      _usernameController.text = 'testUser@test.go.kr';
+      _passwordController.text = 'testUser';
+    }
+  }
 
   // 비밀번호 활성화 토글
   bool _isPasswordVisible = true;
@@ -89,66 +100,126 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _usernameController,
-                decoration: const InputDecoration(labelText: 'Email'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your username';
-                  }
-                  return null;
-                },
-                onFieldSubmitted: (_) {
-                  FocusScope.of(context).nextFocus(); // 다음 입력 필드로 포커스 이동
-                },
-              ),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _isPasswordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
+      // appBar: AppBar(title: const Text('Login')),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24.0),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 400),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Icon(
+                      Icons.lock_outline_rounded,
+                      size: 64,
+                      color: Colors.blueAccent,
                     ),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
-                  ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Login',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+
+                    // 이메일 input field
+                    TextFormField(
+                      controller: _usernameController,
+                      decoration: const InputDecoration(
+                        labelText: 'Email',
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.email_outlined),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your email';
+                        }
+                        return null;
+                      },
+                      onFieldSubmitted: (_) {
+                        FocusScope.of(context).nextFocus(); // 다음 입력 필드로 포커스 이동
+                      },
+                    ),
+                    const SizedBox(height: 16),
+
+                    // 비밀번호 input field
+                    TextFormField(
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        border: const OutlineInputBorder(),
+                        prefixIcon: const Icon(Icons.lock_outline_rounded),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isPasswordVisible = !_isPasswordVisible;
+                            });
+                          },
+                        ),
+                      ),
+                      obscureText: _isPasswordVisible,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      },
+                      onFieldSubmitted: (_) {
+                        if (_formKey.currentState!.validate()) {
+                          _handleLogin();
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 24),
+
+                    // 로그인 버튼
+                    SizedBox(
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        onPressed: _isLoading
+                            ? null
+                            : () {
+                                if (_formKey.currentState!.validate()) {
+                                  _handleLogin();
+                                }
+                              },
+                        child: _isLoading
+                            ? const SizedBox(
+                                width: 24,
+                                height: 24,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2.5,
+                                  color: Colors.white,
+                                ),
+                              )
+                            : const Text(
+                                'Login',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                      ),
+                    ),
+                  ],
                 ),
-                obscureText: _isPasswordVisible,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null;
-                },
-                onFieldSubmitted: (_) {
-                  if (_formKey.currentState!.validate()) {
-                    _handleLogin();
-                  }
-                },
               ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _handleLogin();
-                  }
-                },
-                child: const Text('Login'),
-              ),
-            ],
+            ),
           ),
         ),
       ),

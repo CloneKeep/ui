@@ -10,6 +10,10 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  Map<String, dynamic>? _userInfo; // 서버에서 받아온 유저 정보 저장용 변수
+  bool _isLoading = true; // 로딩 상태를 나타내는 변수
+  String? _errorMessage; // 에러 메시지를 저장하는 변수
+
   // repository 인스턴스 선언
   final NoteRepository _noteRepository = NoteRepository();
   // 무한 재요청 제어(최초 스트림 이벤트 변수에 한번만 바인딩딩
@@ -20,7 +24,8 @@ class _MainPageState extends State<MainPage> {
     super.initState();
     // 화면이 켜질 때 딱 한 번 서버에 데이터를 요청합니다.
     _notesFuture = _noteRepository.fetchNotesAndContents(
-      "d54fc604-c1e5-4f3f-a598-e154a5f20fc3",
+      // "d54fc604-c1e5-4f3f-a598-e154a5f20fc3",
+      "uid", // 실제로는 로그인 후 토큰에서 추출한 uid를 넣어야 함
     );
   }
 
